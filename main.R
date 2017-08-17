@@ -29,6 +29,10 @@ la <- c(30.999322, -90.476514)
 wy <- c(43.543410, -111.045745)
 mi <- c(41.726338, -83.688869)
 me <- c(43.794241, -70.985581)
+ak <- c(36.454972, -90.139330)
+ut <- c(37.816859, -109.042732)
+co <- c(37.815639, -109.039881)
+ny <- c(43.087926, -79.064493)
 
 # State Photos
 file <- c('http://hautahi.com/images/Virginia.png',
@@ -50,18 +54,24 @@ file <- c('http://hautahi.com/images/Virginia.png',
           'http://hautahi.com/images/Tennessee.png',
           'http://hautahi.com/images/Maryland.png',
           'http://hautahi.com/images/Delaware.png',
-          'http://hautahi.com/images/Louisianna.png',
+          'http://hautahi.com/images/Louisiana.png',
           'http://hautahi.com/images/Wyoming.png',
           'http://hautahi.com/images/Michigan.png',
-          'http://hautahi.com/images/Maine.png')
+          'http://hautahi.com/images/Maine.png',
+          'http://hautahi.com/images/Arkansas.png',
+          'http://hautahi.com/images/Utah.png',
+          'http://hautahi.com/images/Colorado.png',
+          'http://hautahi.com/images/New_York.png')
 
 # Create Dataframe
 lat <- c(va[1],ida[1],flo[1],al[1],ohio[1],ken[1],nj[1],sc[1],
          ga[1],nc[1],neb[1],ks[1],nh[1],vt[1],nd[1],sd[1],tn[1],
-         md[1],dw[1],la[1],wy[1],mi[1],me[1])
+         md[1],dw[1],la[1],wy[1],mi[1],me[1],ak[1],ut[1],co[1],
+         ny[1])
 lon <- c(va[2],ida[2],flo[2],al[2],ohio[2],ken[2],nj[2],sc[2],
          ga[2],nc[2],neb[2],ks[2],nh[2],vt[2],nd[2],sd[2],tn[2],
-         md[2],dw[2],la[2],wy[2],mi[2],me[2])
+         md[2],dw[2],la[2],wy[2],mi[2],me[2],ak[2],ut[2],co[2],
+         ny[2])
 
 df=data.frame(lat=lat,lon=lon,file=file)
 
