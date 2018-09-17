@@ -1,9 +1,7 @@
 # This program tidies up some of the raw files provided by the NIJ 
 # for ease of explanation in blog post
 
-library(dplyr)
-library(htmlwidgets)
-library(leaflet)
+library(dplyr); library(htmlwidgets); library(leaflet)
 
 # State coordinates
 va <- c(39.261087, -77.762329)
@@ -33,6 +31,8 @@ ak <- c(36.454972, -90.139330)
 ut <- c(37.816859, -109.042732)
 co <- c(37.815639, -109.039881)
 ny <- c(43.087926, -79.064493)
+tx <- c(33.860190, -96.832803)
+ok <- c(33.883595, -96.834633)
 
 # State Photos
 file <- c('http://hautahi.com/images/Virginia.png',
@@ -61,19 +61,21 @@ file <- c('http://hautahi.com/images/Virginia.png',
           'http://hautahi.com/images/Arkansas.png',
           'http://hautahi.com/images/Utah.png',
           'http://hautahi.com/images/Colorado.png',
-          'http://hautahi.com/images/New_York.png')
+          'http://hautahi.com/images/New_York.png',
+          'http://hautahi.com/images/Texas.png',
+          'http://hautahi.com/images/Oklahoma.png')
 
 # Create Dataframe
 lat <- c(va[1],ida[1],flo[1],al[1],ohio[1],ken[1],nj[1],sc[1],
          ga[1],nc[1],neb[1],ks[1],nh[1],vt[1],nd[1],sd[1],tn[1],
          md[1],dw[1],la[1],wy[1],mi[1],me[1],ak[1],ut[1],co[1],
-         ny[1])
+         ny[1],tx[1],ok[1])
 lon <- c(va[2],ida[2],flo[2],al[2],ohio[2],ken[2],nj[2],sc[2],
          ga[2],nc[2],neb[2],ks[2],nh[2],vt[2],nd[2],sd[2],tn[2],
          md[2],dw[2],la[2],wy[2],mi[2],me[2],ak[2],ut[2],co[2],
-         ny[2])
+         ny[2],tx[2],ok[2])
 
-df=data.frame(lat=lat,lon=lon,file=file)
+df <- data.frame(lat=lat,lon=lon,file=file)
 
 # Create Icons
 icons <- awesomeIcons(icon = "fa-map-signs",
@@ -87,7 +89,12 @@ m <- leaflet(data=df) %>%
                     popup = paste0("<img src = ", file, " height=\"100\" width=\"100\">"),
                     options = popupOptions(closeButton = FALSE,
                                            minWidth = 100,
-                                           maxWidth = 100))
+                                           maxWidth = 100),
+                    #clusterOptions = markerClusterOptions(freezeAtZoom = 9,
+                    #                                      zoomToBoundsOnClick = T,
+                    #                                      removeOutsideVisibleBounds = F)
+                    )
+m
 
 # Save
 saveWidget(m, file="statesign_map.html")
@@ -101,7 +108,6 @@ m<-leaflet(data=df) %>%
                                            minWidth = "auto",
                                            maxWidth = "auto"))
 
-
 leaflet(data=df) %>%
   addProviderTiles("OpenMapSurfer.Roads") %>%
   addAwesomeMarkers(~lon,~lat,icon=icons,
@@ -110,16 +116,6 @@ leaflet(data=df) %>%
                                            minWidth = 100,
                                            maxWidth = 100))
 
-leaflet(data=df) %>%
-  addProviderTiles("OpenMapSurfer.Roads") %>%
-  addAwesomeMarkers(~lon,~lat,icon=flag,
-             popup = paste0("<img src = ", file, " height=\"100\" width=\"100\">"),
-             options = popupOptions(closeButton = FALSE))
-
-leaflet(data=df) %>% addTiles() %>%
-  addPopups(~lon,~lat,icon=icons,popup = paste0("<img src = ", file, " height=\"100\" width=\"100\">"),
-            options = popupOptions(closeButton = FALSE)
-  )
 
 # Alternative open map sources
 CartoDB.Positron
